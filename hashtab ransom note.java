@@ -10,14 +10,32 @@ public class Solution {
 
     // Complete the checkMagazine function below.
     static void checkMagazine(String[] magazine, String[] note) {
-        Set<String> hashm = new HashSet<String>(Arrays.asList(magazine));
-        Set<String> hashn = new HashSet<String>(Arrays.asList(note));
+        boolean missing = false;
+        HashMap<String,Integer> hashm = new HashMap<>();
+        for(String word:magazine){
+            if(hashm.containsKey(word)){
+                hashm.put(word, hashm.get(word)+1);
+            }else{
+                hashm.put(word,1);
+            }
+        }
 
-        String result = (hashm.containsAll(hashn)) ? "Yes":"No";
+        for(String word:note){
+            if(!hashm.containsKey(word)){
+                missing = true;
+                break;
+            }else{
+               int remain = hashm.get(word);
+               if(remain>1){
+                   hashm.put(word,remain-1);
+               }else{
+                   hashm.remove(word);
+               }
+            }
+        }
 
-        System.err.println(hashm.toString());
-        System.err.println(hashn.toString());
-        System.out.println(result);
+        String res = (missing) ? "No":"Yes";
+        System.out.println(res);
     }
 
     private static final Scanner scanner = new Scanner(System.in);

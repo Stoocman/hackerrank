@@ -13,23 +13,26 @@ public class Solution {
         int anagram = 0;
         HashSet<Integer> table = new HashSet<>();
         
-        for(int i=0;i<s.length();i++){
-            int buffer = 1;
-            while(buffer<=s.length() && i+buffer<=s.length()){
-                String sub = s.substring(i,i+buffer);
-                int ascii = asciiValue(sub);
-                if(table.contains(ascii)){
-                    System.err.println("anagram:"+sub);
-                    anagram++;
-                }else{
-                    table.add(ascii);
-                }
-                buffer++;
+        int buffer = 1;
+        while(buffer<=s.length()){
+            for(int i=0;i+buffer<=s.length();i++){
+                int sub1 = asciiValue(s.substring(i,i+buffer));
+                //for(int j=i+1;j+buffer<s.length();j++){
+                    /*if(j+buffer==s.length()) break;
+                    int sub2 = asciiValue(s.substring(j,j+buffer));
+                    System.err.println("sub2:" + (j+buffer));
+                    if(sub2 == sub1) anagram++;*/
+                //}
             }
+            buffer++;
         }
         return anagram;
     }
 
+    a a a a 
+    0 1 2 3
+i   0 1 2 3
+    
     private static int asciiValue(String s){
         int result = 0;
         for(int i=0;i<s.length();i++){
